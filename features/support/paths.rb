@@ -18,6 +18,8 @@ module NavigationHelpers
       country_path(Country.create!(:name => "Test Country", :code => "tc"))
     when /a country edit page/
       edit_country_path(Country.create!(:name => "Test Country #{Time.now.to_i}", :code => Time.now.to_s))
+    when /login/
+      new_user_session_path
 
 
     # Add more mappings here.

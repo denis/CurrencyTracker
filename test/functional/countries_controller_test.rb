@@ -1,9 +1,12 @@
 require 'test_helper'
 
 class CountriesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   should_not_respond_to_actions :new => :get, :destroy => :get
 
   setup do
+    sign_in users(:one)
     @country = countries(:one)
   end
 

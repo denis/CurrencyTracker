@@ -4,7 +4,8 @@ Feature: Manage countries
   wants to manage the countries he has visited.
   
   Scenario: List Countries
-    Given the following countries exist:
+    Given I am a new, authenticated user
+    And the following countries exist:
       |name|code|visited|
       |CountryOne|c1|false|
       |CountryTwo|c2|false|
@@ -21,7 +22,8 @@ Feature: Manage countries
       |CountryFive|c5|Visited|
 
   Scenario: Visit Country
-    Given I am on a country page
+    Given I am a new, authenticated user
+    And I am on a country page
     When I follow "Edit"
     And I check "Visited"
     And I press "Update Country"

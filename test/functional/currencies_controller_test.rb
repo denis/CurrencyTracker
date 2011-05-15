@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class CurrenciesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   should_not_respond_to_actions :new => :get, 
                                 :destroy => :get, 
                                 :create => :post,
@@ -8,6 +10,7 @@ class CurrenciesControllerTest < ActionController::TestCase
                                 :update => :put
 
   setup do
+    sign_in users(:one)
     @currency = currencies(:one)
   end
 
