@@ -20,7 +20,8 @@ module NavigationHelpers
       edit_country_path(Country.create!(:name => "Test Country #{Time.now.to_i}", :code => Time.now.to_s))
     when /login/
       new_user_session_path
-
+    when /^(.*)'s country page$/i
+      country_path(Country.find_by_name($1))
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

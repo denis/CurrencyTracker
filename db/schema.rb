@@ -10,14 +10,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110515120445) do
+ActiveRecord::Schema.define(:version => 20110516173307) do
 
   create_table "countries", :id => false, :force => true do |t|
     t.string   "name"
     t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "visited",    :default => false
   end
 
   create_table "currencies", :id => false, :force => true do |t|
@@ -45,5 +44,12 @@ ActiveRecord::Schema.define(:version => 20110515120445) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "visits", :force => true do |t|
+    t.string   "country_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

@@ -9,11 +9,6 @@
 </p>
 
 <p>
-  <b>Status:</b>
-  <%= @country.visited? ? 'Visited' : 'Not Visited' %>
-</p>
-
-<p>
   <b>Currencies:</b>
   <ul>
     <% @country.currencies.each do |currency| %>
@@ -22,5 +17,17 @@
   </ul>
 </p>
 
-<%= link_to 'Edit', edit_country_path(@country) %> |
-<%= link_to 'Back', countries_path %>
+<p>
+  <b>Status:</b>
+  <%= @country.visited_by?(current_user) ? 'Visited' : 'Not Visited' %>
+</p>
+
+<% if @country.visited_by?(current_user) %>
+  <%= button_to 'Unvisit', country_visit_path(@country), :method => 'delete' %>
+<% else %>
+  <%= button_to 'Visit', country_visit_path(@country) %>
+<% end %>
+
+<p>
+  <%= link_to 'Back', countries_path %>
+</p>
