@@ -13,7 +13,7 @@ class VisitsControllerTest < ActionController::TestCase
       post :create, :country_id => @country.to_param
     end
 
-    assert_redirected_to country_path(assigns(:country))
+    assert_redirected_to country_url(assigns(:country))
   end
 
   test "should destroy visit" do
@@ -23,6 +23,16 @@ class VisitsControllerTest < ActionController::TestCase
       delete :destroy, :country_id => @country.to_param
     end
 
-    assert_redirected_to country_path(assigns(:country))
+    assert_redirected_to country_url(assigns(:country))
+  end
+
+  test "should create multiple visits" do
+    request.env["HTTP_REFERER"] = '/countries'
+
+    assert_difference('Visit.count', 2) do
+      post :create_multiple, :country_codes => [countries(:one), countries(:two)]
+    end
+
+    assert_redirected_to countries_url
   end
 end

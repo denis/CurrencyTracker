@@ -1,9 +1,8 @@
 class VisitsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_country
+  before_filter :find_country, :only => [:create, :destroy]
 
   # POST /countries/af/visit
-  # POST /countries/af/visit.xml
   def create
     if @country.visited_by?(current_user)
       redirect_to @country, :notice => 'Country is already visited.'
@@ -22,7 +21,6 @@ class VisitsController < ApplicationController
   end
 
   # DELETE /countries/af/visit
-  # DELETE /countries/af/visit.xml
   def destroy
     @visit = Visit.find_by_country_id_and_user_id @country.id, current_user.id
 
@@ -31,6 +29,15 @@ class VisitsController < ApplicationController
     end
 
     redirect_to @country, :notice => 'Country was successfully unvisited.'
+  end
+
+  # POST /visits/create_multiple
+  def create_multiple
+    params[:country_codes].each do |code|
+      Visit.create :country => Country.find(code), :user => current_user
+    end
+
+    redirect_to :back
   end
 
   private

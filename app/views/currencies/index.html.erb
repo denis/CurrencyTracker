@@ -13,21 +13,27 @@
 
   <h1>Currencies</h1>
 
-  <table>
-    <tr>
-      <th>Name <input type="text" class="filter" /></th>
-      <th>Code</th>
-      <th>Status</th>
-      <th></th>
-    </tr>
-
-    <% @currencies.each do |currency| %>
+  <%= form_tag create_multiple_visits_path do %>
+    <table>
       <tr>
-        <td><%= currency.name %></td>
-        <td><%= currency.code %></td>
-        <td><%= currency.collected_by?(current_user) ? 'Collected' : 'Not Collected' %></td>
-        <td><%= link_to 'Show', currency %></td>
+        <th></th>
+        <th>Name <input type="text" class="filter" /></th>
+        <th>Code</th>
+        <th>Status</th>
+        <th></th>
       </tr>
-    <% end %>
-  </table>
+
+      <% @currencies.each do |currency| %>
+        <tr>
+          <td><%= check_box_tag('country_codes[]', currency.country.code) unless currency.collected_by?(current_user) %></td>
+          <td class="name"><%= currency.name %></td>
+          <td><%= currency.code %></td>
+          <td><%= currency.collected_by?(current_user) ? 'Collected' : 'Not Collected' %></td>
+          <td><%= link_to 'Show', currency %></td>
+        </tr>
+      <% end %>
+    </table>
+
+    <p><%= submit_tag 'Collect' %></p>
+  <% end %>
 </section>

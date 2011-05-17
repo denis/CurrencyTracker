@@ -9,6 +9,8 @@ CurrencyTracker::Application.routes.draw do
 
   resources :currencies, :only => [:index, :show]
 
+  post 'visits/create_multiple' => 'visits#create_multiple', :as => :create_multiple_visits
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
