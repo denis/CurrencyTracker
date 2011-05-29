@@ -1,43 +1,25 @@
 <section>
-  <div id="collected_currencies_chart" class="simple_pie_chart" width='300px' height='100px'>
-    <table>
-      <tr>
-        <th>Collected</th>
-        <td><%= current_user.collected_currencies.count %></td>
-      </tr><tr>
-        <th>Not Collected</th>
-        <td><%= current_user.not_collected_currencies.count %></td>
-      </tr>
-    </table>
-  </div>
+  <%= render 'chart' %>
 
   <h1>Currencies</h1>
 
-  <%= form_tag create_multiple_visits_path do %>
+  <%= form_tag create_multiple_visits_path(:source => 'currencies'), :remote => true do %>
     <table>
       <tr>
         <th></th>
-        <th>Name <input type="text" class="filter" /></th>
+        <th>Name <input type="text" class="filter" name="filter" /></th>
         <th>Code</th>
         <th>Status</th>
         <th></th>
       </tr>
 
-      <% @currencies.each do |currency| %>
-        <tr>
-          <td><%= check_box_tag('country_codes[]', currency.country.code) unless currency.collected_by?(current_user) %></td>
-          <td class="name"><%= currency.name %></td>
-          <td><%= currency.code %></td>
-          <td><%= currency.collected_by?(current_user) ? 'Collected' : 'Not Collected' %></td>
-          <td><%= link_to 'Show', currency %></td>
-        </tr>
-      <% end %>
+      <%= render @currencies %>
     </table>
 
     <p>
-        <%= submit_tag 'Collect' %>
-        <input type="button" id="check_all" value="Check All" />
-        <input type="button" id="clear_all" value="Clear All" />
+      <%= submit_tag 'Collect' %>
+      <input type="button" id="check_all" value="Check All" />
+      <input type="button" id="clear_all" value="Clear All" />
     </p>
   <% end %>
 </section>

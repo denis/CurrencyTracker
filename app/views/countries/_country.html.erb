@@ -1,0 +1,7 @@
+<%= content_tag_for :tr, country do %>
+  <td><%= check_box_tag('country_codes[]', country.code, false, :id => "country_codes_#{country.code}") unless country.visited_by?(current_user) %></td>
+  <td class="name"><%= country.name %></td>
+  <td><%= country.code %></td>
+  <td><%= country.visited_by?(current_user) ? 'Visited' : 'Not Visited' %></td>
+  <td><%= link_to 'Show', country %></td>
+<% end %>

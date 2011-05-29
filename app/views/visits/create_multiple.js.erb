@@ -1,0 +1,9 @@
+<% source = params[:source] == 'countries' ? 'countries' : 'currencies' %>
+
+<% @visits.each do |visit| %>
+    <% country_or_currency = visit.send source.singularize.to_sym %>
+    $('#<%= dom_id country_or_currency %>').replaceWith('<%=escape_javascript render(country_or_currency) %>');
+<% end %>
+
+$('#<%= source %>_chart').replaceWith('<%=escape_javascript render("#{source}/chart") %>');
+SimplePieChart.initialize($('#<%= source %>_chart')[0]);

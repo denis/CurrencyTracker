@@ -33,11 +33,18 @@ class VisitsController < ApplicationController
 
   # POST /visits/create_multiple
   def create_multiple
-    params[:country_codes].each do |code|
+    params[:country_codes] ||= []
+
+    @visits = params[:country_codes].map do |code|
       Visit.create :country => Country.find(code), :user => current_user
     end
 
-    redirect_to :back
+    respond_to do |format|
+      format.html do
+        redirect_to :back
+      end
+      format.js
+    end
   end
 
   private

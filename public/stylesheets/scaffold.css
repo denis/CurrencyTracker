@@ -161,8 +161,8 @@ section h1 {
 }
 
 /* Charts */
-#collected_currencies_chart,
-#visited_countries_chart {
+#currencies_chart,
+#countries_chart {
   float: right;
 }
 
