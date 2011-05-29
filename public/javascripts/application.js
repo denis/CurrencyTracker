@@ -15,5 +15,17 @@ $(
 				);
 			}
 		).keyup();
+
+		$('#check_all').click(
+		    function () {
+		        $(this).parents('form').find('input[type=checkbox]:visible').attr('checked', true);
+		    }
+		);
+
+		$('#clear_all').click(
+		    function () {
+		        $(this).parents('form').find('input[type=checkbox]:visible').attr('checked', false);
+		    }
+		);
 	}
 );
