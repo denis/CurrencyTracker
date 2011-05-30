@@ -1,12 +1,17 @@
-<div id="currencies_chart" class="simple_pie_chart" width='300px' height='100px'>
-  <table>
-    <tr>
-      <th>Collected</th>
-      <td><%= current_user.collected_currencies.count %></td>
-    </tr><tr>
-      <th>Not Collected</th>
-      <td><%= current_user.not_collected_currencies.count %></td>
-    </tr>
-  </table>
-</div>
+<div id="charts">
+  <div id="currencies_chart" class="simple_pie_chart" width='300px' height='100px'>
+    <table>
+      <tr>
+        <th>Collected</th>
+        <td><%= current_user.collected_currencies.count %></td>
+      </tr><tr>
+        <th>Not Collected</th>
+        <td><%= current_user.not_collected_currencies.count %></td>
+      </tr>
+    </table>
+  </div>
 
+  <div id="visits_chart">
+    <%= visits_over_time_line_graph_for(current_user) %>
+  </div>
+</div>

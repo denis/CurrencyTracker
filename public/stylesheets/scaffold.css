@@ -162,7 +162,8 @@ section h1 {
 
 /* Charts */
 #currencies_chart,
-#countries_chart {
+#countries_chart,
+#visits_chart {
   float: right;
 }
 
